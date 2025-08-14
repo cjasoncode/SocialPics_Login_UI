@@ -22,7 +22,7 @@ This project focuses on creating a **clean, modern, and user-centric design** wh
 ---
 
 ## 📸 Preview  
-👉 **Live Demo:** [Click Here](https://cjasoncode.github.io/Instagram_clone/)  
+👉 **Live Demo:** [Click Here](https://cjasoncode.github.io/SocialPics_Login_UI/)  
 
 <p align="center">
   <img src="SCREENSHOT/screenshot.jpeg" alt="Project Screenshot"  width="300" height="600" >
