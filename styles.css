@@ -59,10 +59,19 @@ select{
     text-align: center;
     left: 100px;
     width: 95px;
-    border: none;
     top: -235px;
+    outline: none;
+    appearance: none;   /* remove browser default styling */
+    -webkit-appearance: none; /* Safari/Chrome */
+    -moz-appearance: none;    /* Firefox */
 
      
+}
+ 
+select:hover, 
+select:focus {
+    border: none;
+    outline: none;
 }
 
 .instagram{
