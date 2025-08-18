@@ -5,12 +5,104 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <title>SOCIALPICS_LOGIN_UI</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
 
+  <style>
+    /* Reset and base */
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
 
-  <title>Document</title>
+    }
+
+    body.show-main {
+      overflow: auto;
+    }
+
+    /* Disclaimer overlay */
+    #disclaimer {
+      position: fixed;
+      inset: 0;
+      background-color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 9999;
+    }
+
+    #disclaimer>div {
+      background: #fff;
+      border-radius: 1.5rem;
+      max-width: 480px;
+      width: 80%;
+      height: 60%;
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
+      text-align: left;
+      font-style: italic;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #disclaimer h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #111;
+      text-align: center;
+      font-style: normal;
+    }
+
+    #disclaimer article {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+      color: #000000;
+      font-style: italic;
+    }
+
+    #disclaimer p.uppercase {
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #2d2d2d;
+    }
+
+    #disclaimer button {
+      margin-top: 200px;
+      align-self: center;
+      padding: 0.5rem 1.5rem;
+      background-color: #000000;
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      border-radius: 0.995rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
+
+  <div id="disclaimer" role="alertdialog" aria-modal="true" aria-labelledby="disclaimer-title"
+    aria-describedby="disclaimer-desc">
+    <div>
+      <h2 id="disclaimer-title"> <U>DISCLAIMER</U></h2>
+      <p class="uppercase" id="disclaimer-desc">
+        THIS WEBSITE, SOCIALPICS, WAS CREATED FOR PERSONAL EDUCATIONAL PURPOSES ONLY.
+      </p>
+      <article>
+        It is not affiliated with, endorsed by, or connected to any company, brand, or organization mentioned herein.All
+        content is provided solely for educational and demonstration purposes.The creator assumes no responsibility or
+        liability for any use, misuse, or interpretation of the information presented on this site.
+      </article>
+
+
+      <button id="disclaimer-ok" aria-label="Acknowledge disclaimer and continue" type="button">I Understand</button>
+    </div>
+  </div>
 
   <div class="box">
     <label for="language"></label>
@@ -91,12 +183,12 @@
         <img class="instagram" src="LOGO\instagram.png" alt="">
       </figure>
 
-     <button type="button" class="facebook"
-    onclick="window.location.href ='https://m.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Foidc%2F%3Fapp_id%3D...';">
-    
-    <img src="LOGO/Facebook.png" alt="">
-    <span class="book">Continue with Facebook</span>
-    </button>
+      <button type="button" class="facebook"
+        onclick="window.location.href ='https://m.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Foidc%2F%3Fapp_id%3D...';">
+
+        <img src="LOGO/Facebook.png" alt="">
+        <span class="book">Continue with Facebook</span>
+      </button>
 
       <span class="divider">OR</span>
 
@@ -143,6 +235,50 @@
         &copy; 2025 Instagram from Meta
       </div>
     </footer> -->
+
+
+  <script>
+    const disclaimer = document.getElementById("disclaimer");
+    const mainContent = document.getElementById("main-content");
+    const okButton = document.getElementById("disclaimer-ok");
+
+    okButton.addEventListener("click", () => {
+      disclaimer.style.display = "none";
+      mainContent.style.display = "block";
+      document.body.classList.add("show-main");
+      okButton.blur();
+    });
+
+    // Trap focus inside disclaimer while visible for accessibility
+    document.addEventListener("keydown", (e) => {
+      if (disclaimer.style.display !== "none") {
+        const focusableElements = disclaimer.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstEl = focusableElements[0];
+        const lastEl = focusableElements[focusableElements.length - 1];
+
+        if (e.key === "Tab") {
+          if (e.shiftKey) {
+            if (document.activeElement === firstEl) {
+              e.preventDefault();
+              lastEl.focus();
+            }
+          } else {
+            if (document.activeElement === lastEl) {
+              e.preventDefault();
+              firstEl.focus();
+            }
+          }
+        }
+      }
+    });
+
+    // Set initial focus on button for accessibility
+    window.onload = () => {
+      okButton.focus();
+    };
+  </script>
 
 </body>
 
